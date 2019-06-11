@@ -225,17 +225,17 @@ function set_ownership_and_permissions {
   local f_perms="${FILES_PERMS:-644}"
   local d_perms="${FOLDERS_PERMS:-755}"
 
-  if [[ ! "$f_perms" =~ ^[0-7]{3,4}$ ]]; then
+  if [[ ! "$f_perms" =~ ^[0-7]{3,4}]]; then
     echo "Warning : the provided files permission octal ($f_perms) is incorrect. Skipping ownership and permissions check."
     return 1
   fi
-  if [[ ! "$d_perms" =~ ^[0-7]{3,4}$ ]]; then
+  if [[ ! "$d_perms" =~ ^[0-7]{3,4}]]; then
     echo "Warning : the provided folders permission octal ($d_perms) is incorrect. Skipping ownership and permissions check."
     return 1
   fi
 
   # Find the user numeric ID if the FILES_UID environment variable isn't numeric.
-  if [[ "$user" =~ ^[0-9]+$ ]]; then
+  if [[ "$user" =~ ^[0-9]+]]; then
     user_num="$user"
   # Check if this user exist inside the container
   elif id -u "$user" > /dev/null 2>&1; then
@@ -248,7 +248,7 @@ function set_ownership_and_permissions {
   fi
 
   # Find the group numeric ID if the FILES_GID environment variable isn't numeric.
-  if [[ "$group" =~ ^[0-9]+$ ]]; then
+  if [[ "$group" =~ ^[0-9]+]]; then
     group_num="$group"
   # Check if this group exist inside the container
   elif getent group "$group" > /dev/null 2>&1; then
@@ -279,7 +279,7 @@ function set_ownership_and_permissions {
     # If the path is a file, check and modify permissions if required.
     elif [[ -f "$path" ]]; then
       # Use different permissions for private files (private keys and ACME account keys) ...
-      if [[ "$path" =~ ^.*(default\.key|key\.pem|\.json)$ ]]; then
+      if [[ "$path" =~ ^.*(default\.key|key\.pem|\.json)]]; then
         if [[ "$(stat -c %a "$path")" != "$f_perms" ]]; then
           [[ "$(lc $DEBUG)" == true ]] && echo "Debug: setting $path permissions to $f_perms."
           chmod "$f_perms" "$path"

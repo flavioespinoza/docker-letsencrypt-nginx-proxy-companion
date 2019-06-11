@@ -7,7 +7,7 @@
 You can generate certificate that are not tied to containers environment variable by mounting a user configuration file inside the container at `/app/letsencrypt_user_data`. This feature also require sharing the `/etc/nginx/conf.d` folder between the **nginx-proxy** and **letsencrypt-nginx-proxy-companion** container (and the **docker-gen** container if you are running a [three container setup](./Advanced-usage.md)):
 
 ```bash
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy \
     --publish 80:80 \
     --publish 443:443 \
@@ -19,7 +19,7 @@ $ docker run --detach \
     jwilder/nginx-proxy
 ```
 ```bash
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-letsencrypt \
     --volumes-from nginx-proxy \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \

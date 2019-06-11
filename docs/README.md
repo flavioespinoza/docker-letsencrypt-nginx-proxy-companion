@@ -1,25 +1,27 @@
-#### Usage:
+# Docs
 
-[Basic (two containers).](./Basic-usage.md)
+## Usage:
 
-[Advanced (three containers).](./Advanced-usage.md)
+- [Basic (two containers).](./Basic-usage.md)
 
-[Getting containers IDs](./Getting-containers-IDs.md)
+- [Advanced (three containers).](./Advanced-usage.md)
 
-[with Docker Compose](./Docker-Compose.md)
+- [Getting containers IDs](./Getting-containers-IDs.md)
 
-[Container utilities](./Container-utilities.md)
+- [with Docker Compose](./Docker-Compose.md)
 
-#### Additional configuration:
+- [Container utilities](./Container-utilities.md)
 
-[Let's Encrypt / ACME](./Let's-Encrypt-and-ACME.md)
+## Additional configuration:
 
-[Container configuration](./Container-configuration.md)
+- [Let's Encrypt / ACME](./Let's-Encrypt-and-ACME.md)
 
-[Persistent data](./Persistent-data.md)
+- [Container configuration](./Container-configuration.md)
 
-[Standalone certificates](./Standalone-certificates-(beta).md) **(Beta)**
+- [Persistent data](./Persistent-data.md)
 
-#### Troubleshooting:
+- [Standalone certificates](./Standalone-certificates-(beta).md) **(Beta)**
 
-[Invalid / failing authorizations](./Invalid-authorizations.md)
+## Troubleshooting:
+
+- [Invalid / failing authorizations](./Invalid-authorizations.md)

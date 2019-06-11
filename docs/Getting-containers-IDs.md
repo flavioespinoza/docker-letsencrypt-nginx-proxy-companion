@@ -1,4 +1,6 @@
-## Getting nginx-proxy/nginx/docker-gen containers IDs
+# Get Containers IDs
+
+### Getting nginx-proxy/nginx/docker-gen containers IDs
 
 For **letsencrypt-nginx-proxy-companion** to work properly, it needs to know the ID of the **nginx**/**nginx-proxy** container (in both [two](./Basic-usage.md) and [three](./Advanced-usage.md) containers setups), plus the ID of the **docker-gen** container in a [three container setup](./Advanced-usage.md).
 
@@ -23,35 +25,35 @@ The advantage the `label` methods have over the `environment variable` (and `vol
 #### Examples with three containers setups:
 
 `label` method.
-```
-$ docker run --detach \
+```bash
+docker run --detach \
     [...]
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy \
     nginx
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen \
     jwilder/docker-gen
 
-$ docker run --detach \
+docker run --detach \
     [...]
     jrcs/letsencrypt-nginx-proxy-companion
 ```
 
 `environment variable` method
-```
-$ docker run --detach \
+```bash
+docker run --detach \
     [...]
     --name unique-container-name \
     nginx
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --name another-unique-container-name \
     jwilder/docker-gen
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --env NGINX_PROXY_CONTAINER=unique-container-name \
     --env NGINX_DOCKER_GEN_CONTAINER=another-unique-container-name \
@@ -59,36 +61,36 @@ $ docker run --detach \
 ```
 
 `volumes_from` (**nginx**) + `label` (**docker-gen**) method
-```
-$ docker run --detach \
+```bash
+docker run --detach \
     [...]
     --name unique-container-name \
     nginx
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --label com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen \
     jwilder/docker-gen
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --volumes-from unique-container-name \
     jrcs/letsencrypt-nginx-proxy-companion
 ```
 
 `volumes_from` (**nginx**) + `environment variable` (**docker-gen**) method
-```
-$ docker run --detach \
+```bash
+docker run --detach \
     [...]
     --name unique-container-name \
     nginx
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --name another-unique-container-name \
     jwilder/docker-gen
 
-$ docker run --detach \
+docker run --detach \
     [...]
     --volumes-from unique-container-name \
     --env NGINX_DOCKER_GEN_CONTAINER=another-unique-container-name \

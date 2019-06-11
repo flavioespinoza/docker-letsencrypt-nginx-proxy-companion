@@ -17,9 +17,9 @@ Check that your domain name A (and AAAA, if present) records points to the corre
 Create a test nginx container on your host and try to reach it over both IPv4 and IPv6.
 
 ```bash
-you@remotedockerhost$ docker run -d -p 80:80 nginx:alpine
+you@remotedockerhostdocker run -d -p 80:80 nginx:alpine
 
-you@localcomputer$ curl http://your.domain.tld
+you@localcomputercurl http://your.domain.tld
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,7 @@ you@localcomputer$ curl http://your.domain.tld
 [...]
 </html>
 
-you@localcomputer$ curl -6 http://your.domain.tld
+you@localcomputercurl -6 http://your.domain.tld
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,11 +63,11 @@ Pull `jrcs/letsencrypt-nginx-proxy-companion:latest` again and get the latest [l
 The challenge files are automatically cleaned up **after** the authorization process, wether it succeeded or failed, so trying to `curl` them from the outside won't yeld any result. You can however create a test file inside the same folder and use it to test the challenge files reachability from the outside (over both IPv4 and IPv6 if you want to use the latter):
 
 ```
-you@remotedockerhost$ docker exec your-le-container bash -c 'echo "Hello world!" > /usr/share/nginx/html/.well-known/acme-challenge/hello-world'
+you@remotedockerhostdocker exec your-le-container bash -c 'echo "Hello world!" > /usr/share/nginx/html/.well-known/acme-challenge/hello-world'
 
-you@localcomputer$ curl http://yourdomain.tld/.well-known/acme-challenge/hello-world
+you@localcomputercurl http://yourdomain.tld/.well-known/acme-challenge/hello-world
 Hello world!
-you@localcomputer$ curl -6 http://yourdomain.tld/.well-known/acme-challenge/hello-world
+you@localcomputercurl -6 http://yourdomain.tld/.well-known/acme-challenge/hello-world
 Hello world!
 ```
 

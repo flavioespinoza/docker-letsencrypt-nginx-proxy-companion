@@ -26,12 +26,12 @@ The `LETSENCRYPT_EMAIL` environment variable must be a valid email and will be u
 Examples:
 
 ```bash
-$ docker run -d nginx \
+docker run -d nginx \
   VIRTUAL_HOST=somedomain.tld \
   LETSENCRYPT_HOST=somedomain.tld \
   LETSENCRYPT_EMAIL=contact@somedomain.tld
 
-$ docker run -d nginx \
+docker run -d nginx \
   VIRTUAL_HOST=anotherdomain.tld \
   LETSENCRYPT_HOST=anotherdomain.tld \
   LETSENCRYPT_EMAIL=someone@anotherdomain.tld

@@ -5,7 +5,7 @@
 When you follow instructions from Basic usage or Advanced usage, Docker will automatically create **anonymous volumes** (volumes with a random name) for every `--volume` / `-v` argument passed:
 
 ```shell
-$ docker run -d \
+docker run -d \
     --name nginx-proxy \
     -p 80:80 \
     -p 443:443 \
@@ -15,7 +15,7 @@ $ docker run -d \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     jwilder/nginx-proxy
 
-$ docker volume ls
+docker volume ls
 DRIVER              VOLUME NAME
 local               287be3abd610e5566500d719ceb8b952952f12c9324ef02d05785d4ee9737ae9
 local               6530b1b40cf89efb71aa7fd19bddec927fa2bcae59b04b9c1c850af72ffe0123
@@ -28,7 +28,7 @@ local               f2cd94ca48904dc9cfc840ce4b265a04831c580d525253d7a0e5aac4d1dc
 Using **named volumes** instead make managing volumes easier:
 
 ```shell
-$ docker run -d \
+docker run -d \
     --name nginx-proxy \
     -p 80:80 \
     -p 443:443 \
@@ -38,7 +38,7 @@ $ docker run -d \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     jwilder/nginx-proxy
 
-$ docker volume ls
+docker volume ls
 DRIVER              VOLUME NAME
 local               certs
 local               vhost

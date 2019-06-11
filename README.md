@@ -1,9 +1,4 @@
-[![Build Status](https://travis-ci.org/JrCs/docker-letsencrypt-nginx-proxy-companion.svg?branch=master)](https://travis-ci.org/JrCs/docker-letsencrypt-nginx-proxy-companion)
-[![GitHub release](https://img.shields.io/github/release/jrcs/docker-letsencrypt-nginx-proxy-companion.svg)](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/releases)
-[![Image info](https://images.microbadger.com/badges/image/jrcs/letsencrypt-nginx-proxy-companion.svg)](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion "Click to view the image on Docker Hub")
-[![Docker stars](https://img.shields.io/docker/stars/jrcs/letsencrypt-nginx-proxy-companion.svg)](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion "Click to view the image on Docker Hub")
-[![Docker pulls](https://img.shields.io/docker/pulls/jrcs/letsencrypt-nginx-proxy-companion.svg)](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion "Click to view the image on Docker Hub")
-
+# Docker Nginx Proxy and Let's Encrypt
 **letsencrypt-nginx-proxy-companion** is a lightweight companion container for [**nginx-proxy**](https://github.com/jwilder/nginx-proxy).
 
 It handles the automated creation, renewal and use of Let's Encrypt certificates for proxyed Docker containers.
@@ -26,7 +21,7 @@ Please note that [letsencrypt-nginx-proxy-companion does not work with ACME v2 e
 * Your DNS provider must [answers correctly to CAA record requests](https://letsencrypt.org/docs/caa/).
 * If your (sub)domains have AAAA records set, the host must be publicly reachable over IPv6 on port `80` and `443`.
 
-![schema](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/blob/master/schema.png)
+![schema](schema.png)
 
 ## Basic usage (with the nginx-proxy container)
 
@@ -43,7 +38,7 @@ Example of use:
 Start **nginx-proxy** with the three additional volumes declared:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy \
     --publish 80:80 \
     --publish 443:443 \
@@ -61,11 +56,11 @@ Binding the host docker socket (`/var/run/docker.sock`) inside the container to 
 Start the **letsencrypt-nginx-proxy-companion** container, getting the volumes from **nginx-proxy** with `--volumes-from`:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-letsencrypt \
     --volumes-from nginx-proxy \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
-    --env "DEFAULT_EMAIL=mail@yourdomain.tld" \
+    --env "DEFAULT_EMAIL=flavio.espinoza@gmail.com" \
     jrcs/letsencrypt-nginx-proxy-companion
 ```
 
@@ -82,10 +77,10 @@ Once both **nginx-proxy** and **letsencrypt-nginx-proxy-companion** containers a
 Certificates will only be issued for containers that have both `VIRTUAL_HOST` and `LETSENCRYPT_HOST` variables set to domain(s) that correctly resolve to the host, provided the host is publicly reachable.
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name your-proxyed-app \
-    --env "VIRTUAL_HOST=subdomain.yourdomain.tld" \
-    --env "LETSENCRYPT_HOST=subdomain.yourdomain.tld" \
+    --env "VIRTUAL_HOST=authnet.ryuko-matoi.co" \
+    --env "LETSENCRYPT_HOST=authnet.ryuko-matoi.co" \
     nginx
 ```
 
@@ -96,12 +91,12 @@ If the proxyed container listen on and expose another port than the default `80`
 Example using [Grafana](https://hub.docker.com/r/grafana/grafana/) (expose and listen on port 3000):
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name grafana \
-    --env "VIRTUAL_HOST=othersubdomain.yourdomain.tld" \
+    --env "VIRTUAL_HOST=app.authnet.ryuko-matoi.co" \
     --env "VIRTUAL_PORT=3000" \
-    --env "LETSENCRYPT_HOST=othersubdomain.yourdomain.tld" \
-    --env "LETSENCRYPT_EMAIL=mail@yourdomain.tld" \
+    --env "LETSENCRYPT_HOST=app.authnet.ryuko-matoi.co" \
+    --env "LETSENCRYPT_EMAIL=flavio.espinoza@gmail.com" \
     grafana/grafana
 ```
 
@@ -109,4 +104,4 @@ Repeat [Step 3](#step-3---proxyed-containers) for any other container you want t
 
 ## Additional documentation
 
-Please check the [docs section](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/tree/master/docs) or the [project's wiki](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/wiki).
+Please check the [docs section](docs/README.md) or the [project's wiki](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/wiki).

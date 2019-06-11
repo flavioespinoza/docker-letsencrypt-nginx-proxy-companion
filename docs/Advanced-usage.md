@@ -23,7 +23,7 @@ Example:
 * Start nginx [(official image)](https://hub.docker.com/_/nginx/) with the required volumes:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy \
     --publish 80:80 \
     --publish 443:443 \
@@ -40,7 +40,7 @@ $ docker run --detach \
 * Start the **docker-gen** container with the shared volumes (with `--volume-from`), the template file and the docker socket:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-gen \
     --volumes-from nginx-proxy \
     --volume /path/to/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro \
@@ -57,7 +57,7 @@ Note that you must pass the exact name of the **nginx** container to **docker-ge
 * Start the **letsencrypt-nginx-proxy-companion** container with the `NGINX_DOCKER_GEN_CONTAINER` environment variable correctly set:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-letsencrypt \
     --volumes-from nginx-proxy \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -71,7 +71,7 @@ $ docker run --detach \
 * Once the three containers are up, start any containers to be proxied as described in [basic usage](./Basic-usage.md).
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name your-proxyed-app
     --env "VIRTUAL_HOST=subdomain.yourdomain.tld" \
     --env "LETSENCRYPT_HOST=subdomain.yourdomain.tld" \

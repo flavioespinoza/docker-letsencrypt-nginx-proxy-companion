@@ -7,7 +7,7 @@ If you set this environment variable value to `https://acme-staging.api.letsencr
 For example
 
 ```bash
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-letsencrypt \
     --volumes-from nginx-proxy \
     --volume /path/to/certs:/etc/nginx/certs:rw \

@@ -13,7 +13,7 @@ Example of use:
 Start **nginx-proxy** with the three additional volumes declared:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy \
     --publish 80:80 \
     --publish 443:443 \
@@ -31,7 +31,7 @@ Binding the host docker socket (`/var/run/docker.sock`) inside the container to 
 Start the **letsencrypt-nginx-proxy-companion** container, getting the volumes from **nginx-proxy** with `--volumes-from`:
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name nginx-proxy-letsencrypt \
     --volumes-from nginx-proxy \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -52,7 +52,7 @@ Once both **nginx-proxy** and **letsencrypt-nginx-proxy-companion** containers a
 Certificates will only be issued for containers that have both `VIRTUAL_HOST` and `LETSENCRYPT_HOST` variables set to domain(s) that correctly resolve to the host, provided the host is publicly reachable.
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name your-proxyed-app
     --env "VIRTUAL_HOST=subdomain.yourdomain.tld" \
     --env "LETSENCRYPT_HOST=subdomain.yourdomain.tld" \
@@ -66,7 +66,7 @@ If the proxyed container listen on and expose another port than the default `80`
 Example using [Grafana](https://hub.docker.com/r/grafana/grafana/) (expose and listen on port 3000):
 
 ```shell
-$ docker run --detach \
+docker run --detach \
     --name grafana
     --env "VIRTUAL_HOST=othersubdomain.yourdomain.tld" \
     --env "VIRTUAL_PORT=3000" \
